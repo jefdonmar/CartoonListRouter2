@@ -3,13 +3,13 @@ import CartoonModel from './cartoon_model';
 
 let CartoonCollection = Backbone.Collection.extend({
 
-   url: 'https://api.parse.com/1/classes/cartoonList2',
+  url: 'https://api.parse.com/1/classes/cartoonList2',
 
-   model: CartoonModel,
+  model: CartoonModel,
 
-   parse: function(data) {
+  parse: function(data) {
     return data.results;
-   }
+  }
 
 });
 
