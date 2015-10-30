@@ -3,7 +3,7 @@ import CartoonModel from './cartoon_model';
 
 let CartoonCollection = Backbone.Collection.extend({
 
-   url: 'https://api.parse.com/1/classes/cartoonList',
+   url: 'https://api.parse.com/1/classes/cartoonList2',
 
    model: CartoonModel,
 
