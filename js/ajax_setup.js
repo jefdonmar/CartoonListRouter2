@@ -13,3 +13,5 @@ $.ajaxSetup({
 
 
 });
+
+// This step setup you router to get the information from you parse file 
