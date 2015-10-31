@@ -203,6 +203,11 @@ exports['default'] = _backbone2['default'].Router.extend({
         _this.navigate('cartoons', { trigger: true });
       });
     });
+  },
+
+  start: function start() {
+    _backbone2['default'].history.start();
+    return this;
   }
 
 });

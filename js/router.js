@@ -63,7 +63,12 @@ export default Backbone.Router.extend({
       });
 
     });
-  }
+  },
+  
+  start: function() {
+    Backbone.history.start();
+    return this;
+  },
 
 });
 
