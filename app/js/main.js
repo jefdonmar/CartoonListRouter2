@@ -208,6 +208,39 @@ exports['default'] = _backbone2['default'].Router.extend({
   start: function start() {
     _backbone2['default'].history.start();
     return this;
+  },
+
+  showSpinner: function showSpinner() {
+    this.$el.html((0, _views.Spinner)());
+  },
+
+  redirectToCartoons: function redirectToCartoons() {
+    this.navigate('cartoons', { replace: true, trigger: true });
+  },
+
+  showCartoons: function showCartoons() {
+    var _this2 = this;
+
+    this.showSpinner();
+    this.collection.fetch().then(function () {
+      _this2.$el.html((0, _views.Cartoons)(_this2.collection.toJSON()));
+    });
+  },
+
+  showCartoon: function showCartoon(id) {
+    var _this3 = this;
+
+    var cartoon = this.collection.get(id);
+
+    if (cartoon) {
+      this.$el.html((0, _views.Cartoon)(cartoon.toJSON()));
+    } else {
+      this.showSpinner();
+      cartoon = this.collection.add({ objectId: id });
+      cartoon.fetch().then(function () {
+        _this3.$el.html((0, _views.Cartoon)(cartoon.toJSON()));
+      });
+    }
   }
 
 });
