@@ -176,7 +176,7 @@ exports['default'] = _backbone2['default'].Router.extend({
       _this.navigate(route, { trigger: true });
     });
 
-    this.$el.on('click', ',create-character', function (event) {
+    this.$el.on('click', '.create-character', function (event) {
       console.log('should have me at the update form');
       var $div = (0, _jquery2['default'])(event.currentTarget);
       _this.navigate('addCartoon', { trigger: true });
@@ -241,6 +241,11 @@ exports['default'] = _backbone2['default'].Router.extend({
         _this3.$el.html((0, _views.Cartoon)(cartoon.toJSON()));
       });
     }
+  },
+
+  newCartoon: function newCartoon() {
+    this.showSpinner();
+    this.$el.html((0, _views2.NewCartoon)());
   }
 
 });

@@ -35,7 +35,7 @@ export default Backbone.Router.extend({
       this.navigate(route, {trigger: true});
     });
 
-    this.$el.on('click', ',create-character', (event) => {
+    this.$el.on('click', '.create-character', (event) => {
       console.log('should have me at the update form');
       let $div = $(event.currentTarget);
       this.navigate('addCartoon', {trigger: true});
@@ -98,6 +98,11 @@ export default Backbone.Router.extend({
       });
     }
   },
+
+  newCartoon: function() {
+    this.showSpinner();
+    this.$el.html(NewCartoon());
+  }
 
 });
 
