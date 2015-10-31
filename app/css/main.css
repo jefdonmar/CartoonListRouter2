@@ -2046,8 +2046,8 @@ body {
     padding: 10px; }
   body .full-profile h2 {
     text-align: center;
-    display: inline;
-    max-width: 30%; }
+    display: inline-block;
+    max-width: 50%; }
   body button {
     background-color: white;
     border: none;
