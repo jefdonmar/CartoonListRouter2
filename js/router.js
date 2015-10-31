@@ -6,18 +6,18 @@ import {Cartoon as CartoonModel} from './resources';
 import {Cartoon as CartoonView} from './views';
 import {Cartoons as CartoonsView} from './views';
 import {Spinner} from './views';
-import {NewCartoon} from '.views';
+import {NewCartoon} from './views/';
 
 export default Backbone.Router.extend({
 
   routes: {
-    "" : "redirectToCartoons",
-    "cartoons": "showCartoons",
-    "cartoon/:id" : "showCartoon",
-    "addCartoon" : "newCartoon"
+    '' : 'redirectToCartoons',
+    'cartoons': 'showCartoons',
+    'cartoon/:id' : 'showCartoon',
+    'addCartoon' : 'newCartoon'
   },
 
-  initialize(appElement) {
+  initialize: function(appElement) {
     this.$el = appElement;
     this.collection = new CartoonCollection();
 
@@ -63,45 +63,8 @@ export default Backbone.Router.extend({
       });
 
     });
-  },
-
-  start() {
-    Backbone.history.start();
-    return this;
-  },
-
-  showSpinner() {
-    this.$el.html(Spinner());
-  },
-
-  redirectToCartoons() {
-    this.navigate('cartoons', {replace: true, trigger: true});
-  },
-
-  showCartoons() {
-    this.showSpinner();
-    this.collection.fetch().then( () => {
-      this.$el.html(CartoonsView(this.collection.toJSON()));
-    });
-  },
-
-  showCartoon(id) {
-    let cartoon = this.collection.get(id);
-
-    if (cartoon) {
-      this.$el.html(CartoonView(cartoon.toJSON()));
-    } else {
-      this.showSpinner();
-      cartoon = this.collection.add({objectId: id});
-      cartoon.fetch().then( () => {
-        this.$el.html(CartoonView(cartoon.toJSON()));
-      });
-    }
-  },
-
-  newCartoon() {
-    this.showSpinner();
-    this.$el.html.(NewCartoon());
   }
 
 });
+
+

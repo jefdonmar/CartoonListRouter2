@@ -1,7 +1,7 @@
 export default function() {
   return `
     <div class="add-cartoon">
-      <h2>Add Chartoon Character</h2>
+      <h2>Add Cartoon Character</h2>
       <form>
         <label>Charcter: <input type="text" class ="characterName"></label>
         <label>Cartoon Title: <input type="text" class ="cartoonName"></label>

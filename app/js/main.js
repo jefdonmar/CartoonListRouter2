@@ -13,76 +13,14 @@ var API_KEY = 'lJoeKAuCsm8wgKQKkxpcx5WBADBrdnf7DiXv4jyi';
 _jquery2['default'].ajaxSetup({
 
   headers: {
-
     'X-Parse-Application-Id': APP_ID,
     'X-Parse-REST-API-KEY': API_KEY
   }
-
 });
 
 // This step setup you router to get the information from you parse file
 
-},{"jquery":9}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _backbone = require('backbone');
-
-var _backbone2 = _interopRequireDefault(_backbone);
-
-var _cartoon_model = require('./cartoon_model');
-
-var _cartoon_model2 = _interopRequireDefault(_cartoon_model);
-
-var CartoonCollection = _backbone2['default'].Collection.extend({
-
-  url: 'https://api.parse.com/1/classes/cartoonList2',
-
-  model: _cartoon_model2['default'],
-
-  parse: function parse(data) {
-    return data.results;
-  }
-
-});
-
-exports['default'] = CartoonCollection;
-
-// This sets up our list view of all of the cartoons that I have on my list
-module.exports = exports['default'];
-
-},{"./cartoon_model":3,"backbone":8}],3:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _backbone = require('backbone');
-
-var _backbone2 = _interopRequireDefault(_backbone);
-
-var CartoonModel = _backbone2['default'].Model.extend({
-
-  urlRoot: 'https://api.parse.com/1/classes/cartoonList2',
-
-  idAttribute: 'objectId'
-
-});
-
-exports['default'] = CartoonModel;
-
-// This gives the model of how you want data to be collected for an individual cartoon
-module.exports = exports['default'];
-
-},{"backbone":8}],4:[function(require,module,exports){
+},{"jquery":13}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -99,24 +37,94 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+require('./ajax_setup');
+
 var _router = require('./router');
 
 var _router2 = _interopRequireDefault(_router);
 
-require('./ajax_setup');
-
-var _cartoon_collection = require('./cartoon_collection');
-
-var _cartoon_collection2 = _interopRequireDefault(_cartoon_collection);
-
 console.log('Hello, World');
 
-var appElement = (0, _jquery2['default'])('.app');
+var $app = (0, _jquery2['default'])('.app');
+new _router2['default']($app).start();
 
-var router = new _router2['default'](appElement);
-router.start();
+},{"./ajax_setup":1,"./router":6,"jquery":13,"moment":14,"underscore":15}],3:[function(require,module,exports){
+'use strict';
 
-},{"./ajax_setup":1,"./cartoon_collection":2,"./router":5,"jquery":9,"moment":10,"underscore":11}],5:[function(require,module,exports){
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+exports['default'] = _backbone2['default'].Model.extend({
+
+  urlRoot: 'https://api.parse.com/1/classes/cartoonList2',
+
+  idAttribute: 'objectId'
+
+});
+
+// This gives the model of how you want data to be collected for an individual cartoon
+module.exports = exports['default'];
+
+},{"backbone":12}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
+
+var _cartoon = require('./cartoon');
+
+var _cartoon2 = _interopRequireDefault(_cartoon);
+
+exports['default'] = _backbone2['default'].Collection.extend({
+
+  url: 'https://api.parse.com/1/classes/cartoonList2',
+
+  model: _cartoon2['default'],
+
+  parse: function parse(data) {
+    return data.results;
+  }
+
+});
+
+// This sets up our list view of all of the cartoons that I have on my list
+module.exports = exports['default'];
+
+},{"./cartoon":3,"backbone":12}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _cartoon = require('./cartoon');
+
+var _cartoon2 = _interopRequireDefault(_cartoon);
+
+var _cartoons = require('./cartoons');
+
+var _cartoons2 = _interopRequireDefault(_cartoons);
+
+exports.Cartoon = _cartoon2['default'];
+exports.Cartoons = _cartoons2['default'];
+
+},{"./cartoon":3,"./cartoons":4}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -133,93 +141,88 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _cartoon_collection = require('./cartoon_collection');
+var _resources = require('./resources');
 
-var _cartoon_collection2 = _interopRequireDefault(_cartoon_collection);
+var _views = require('./views');
 
-var _viewsCartoon_list = require('./views/cartoon_list');
+var _views2 = require('./views/');
 
-var _viewsCartoon_list2 = _interopRequireDefault(_viewsCartoon_list);
-
-var _viewsIndividual_view = require('./views/individual_view');
-
-var _viewsIndividual_view2 = _interopRequireDefault(_viewsIndividual_view);
-
-// import addCartoon from '.views/add_cartoon';
-
-var Router = _backbone2['default'].Router.extend({
+exports['default'] = _backbone2['default'].Router.extend({
 
   routes: {
-    '': 'cartoonlist',
-    'individualView/:id': 'showIndividualCartoon'
+    '': 'redirectToCartoons',
+    'cartoons': 'showCartoons',
+    'cartoon/:id': 'showCartoon',
+    'addCartoon': 'newCartoon'
   },
 
   initialize: function initialize(appElement) {
-    this.$el = appElement;
-
-    this.cartoons = new _cartoon_collection2['default']();
-
-    var router = this;
-
-    this.$el.on('click', '.cartoon-list-item', function (event) {
-      var $p = (0, _jquery2['default'])(event.currentTarget);
-      var cartoonId = $p.data('cartoon-id');
-      router.navigate('cartoons/${cartoonId}');
-      router.showIndividualCartoon(cartoonId);
-      // back to home button
-      var backButton = (0, _jquery2['default'])('.back');
-      backButton.on('click', function (event) {
-        var $button = (0, _jquery2['default'])(event.currentTarget);
-        router.navigate('', { trigger: true });
-      });
-    });
-  },
-
-  showSpinner: function showSpinner() {
-    this.$el.html('<i class="fa fa-spinner fa-spin"></i>');
-  },
-
-  cartoonlist: function cartoonlist() {
     var _this = this;
 
-    this.showSpinner();
-    console.log('grabbing cartoons');
-    this.cartoons.fetch().then(function () {
+    this.$el = appElement;
+    this.collection = new _resources.Cartoons();
 
-      _this.$el.html((0, _viewsCartoon_list2['default'])(_this.cartoons.toJSON()));
+    this.$el.on('click', '.cartoon-list-item', function (event) {
+      var $div = (0, _jquery2['default'])(event.currentTarget);
+      var cartoonId = $div.data('cartoon-id');
+
+      _this.navigate('cartoon/${cartoonId}', { trigger: true });
     });
-  },
 
-  showIndividualCartoon: function showIndividualCartoon(cartoonId) {
-    var _this2 = this;
+    this.$el.on('click', '.back-button', function (event) {
+      console.log("y'all go back not ya hear");
+      var $button = (0, _jquery2['default'])(event.currentTarget);
+      var route = $button.data('to');
+      _this.navigate(route, { trigger: true });
+    });
 
-    console.log('show individual cartoons');
-    var cartoon = this.cartoons.get(cartoonId);
+    this.$el.on('click', ',create-character', function (event) {
+      console.log('should have me at the update form');
+      var $div = (0, _jquery2['default'])(event.currentTarget);
+      _this.navigate('addCartoon', { trigger: true });
+    });
 
-    if (cartoon) {
-      this.$el.html((0, _viewsIndividual_view2['default'])(cartoon.toJSON()));
-    } else {
-      (function () {
-        var cartoon = _this2.cartoons.add({ objectId: cartoonId });
-        var router = _this2;
-        _this2.showSpinner();
-        cartoon.fetch().then(function () {
-          cartoon.$div.html((0, _viewsIndividual_view2['default'])(cartoon.toJSON()));
-        });
-      })();
-    }
-  },
+    this.$el.on('click', '.add-new-cartoon', function (event) {
+      console.log('I wanna be a cartoon');
 
-  start: function start() {
-    _backbone2['default'].history.start();
+      var photo = (0, _jquery2['default'])(_this.$el).find('.photo').val();
+      var characterName = (0, _jquery2['default'])(_this.$el).find('.characterName').val();
+      var cartoonTitle = (0, _jquery2['default'])(_this.$el).find('.cartoonTitle').val();
+      var station = (0, _jquery2['default'])(_this.$el).find('.station').val();
+
+      var model = new _resources.Cartoon({
+        Photo: photo,
+        Character: characterName,
+        Cartoon: cartoonTitle,
+        Station: station
+      });
+
+      _this.collection.add(model);
+      model.save().then(function () {
+        alert('And We have a new CARTOON!!!');
+        _this.navigate('cartoons', { trigger: true });
+      });
+    });
   }
 
 });
-
-exports['default'] = Router;
 module.exports = exports['default'];
 
-},{"./cartoon_collection":2,"./views/cartoon_list":6,"./views/individual_view":7,"backbone":8,"jquery":9}],6:[function(require,module,exports){
+},{"./resources":5,"./views":9,"./views/":9,"backbone":12,"jquery":13}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = function (data) {
+  return "\n    <div class=\"cartoon\">\n      <button class=\"back-button\" data-to=\"cartoons\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>\n  ";
+};
+
+// This gives the template of how the data will be shown when a character is clicked
+module.exports = exports["default"];
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -227,12 +230,12 @@ Object.defineProperty(exports, '__esModule', {
 });
 function processData(data) {
   return data.map(function (item) {
-    return '\n      <div class="cartoon-list-item" data-cartoon-id="' + item.objectId + '">\n      <img src="' + item.photo + '">\n    \n      <p>' + item.characterName + '</p>\n      <hr>\n      </div>\n      ';
+    return '\n      <div class="cartoon-list-item" data-cartoon-id="' + item.objectId + '">\n        <img src="' + item.photo + '">\n        <span>' + item.characterName + '</span>\n        <hr>\n      </div>\n    ';
   }).join('');
 }
 
 exports['default'] = function (data) {
-  return '\n    <h2>Cartoon List</h2>\n    <div>' + processData(data) + '</div>\n    <button class="create-character"><i class="fa fa-plus"></i> Add New</button>\n  ';
+  return '\n    <div class=\'cartoon-list\'>\n      <h1>Cartoons</h1>\n      <div>' + processData(data) + '</div>\n      <button class="create-character"><i class="fa fa-plus"></i> Add New</button>\n    </div>\n  ';
 };
 
 // this passes the processData function that sets up the list of items so that
@@ -241,22 +244,64 @@ exports['default'] = function (data) {
 // Also added the new Cartoon Button
 module.exports = exports['default'];
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _cartoon = require('./cartoon');
+
+var _cartoon2 = _interopRequireDefault(_cartoon);
+
+var _cartoons = require('./cartoons');
+
+var _cartoons2 = _interopRequireDefault(_cartoons);
+
+var _spinner = require('./spinner');
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
+var _new_cartoon = require('./new_cartoon');
+
+var _new_cartoon2 = _interopRequireDefault(_new_cartoon);
+
+exports.Cartoon = _cartoon2['default'];
+exports.Cartoons = _cartoons2['default'];
+exports.Spinner = _spinner2['default'];
+exports.NewCartoon = _new_cartoon2['default'];
+
+},{"./cartoon":7,"./cartoons":8,"./new_cartoon":10,"./spinner":11}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports["default"] = function (data) {
-
-  return "\n    <div class=\"full-profile\">\n      <button class=\"back\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
+exports["default"] = function () {
+  return "\n    <div class=\"add-cartoon\">\n      <h2>Add Cartoon Character</h2>\n      <form>\n        <label>Charcter: <input type=\"text\" class =\"characterName\"></label>\n        <label>Cartoon Title: <input type=\"text\" class =\"cartoonName\"></label>\n        <label>Station Name: <input type=\"text\" class =\"station\"></label>\n        <label>GIF URL: <input type=\"text\" class =\"photo\"></label>\n      </form>\n      <button class=\"add-new-cartoon\">Add New Character</button>\n    </div>\n  ";
 };
 
-// This gives the template of how the data will be shown when a character is clicked
+// Gives how the add new cartoon form will look
 module.exports = exports["default"];
 
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = function () {
+  return "\n    <h1 class=\"spinner\">\n      <i class=\"fa fa-spinner fa-spin\"></i>\n    </h1> \n  ";
+};
+
+module.exports = exports["default"];
+
+},{}],12:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -2155,7 +2200,7 @@ module.exports = exports["default"];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":9,"underscore":11}],9:[function(require,module,exports){
+},{"jquery":13,"underscore":15}],13:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11367,7 +11412,7 @@ return jQuery;
 
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -14563,7 +14608,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -16113,7 +16158,7 @@ return jQuery;
   }
 }.call(this));
 
-},{}]},{},[4])
+},{}]},{},[2])
 
 
 //# sourceMappingURL=main.js.map

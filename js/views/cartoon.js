@@ -1,8 +1,7 @@
 export default function(data) {
-
   return `
-    <div class="full-profile">
-      <button class="back-button">
+    <div class="cartoon">
+      <button class="back-button" data-to="cartoons">
         <i class="fa fa-arrow-left"></i>
       </button>
       <h2>Character Profile</h2>
@@ -13,7 +12,8 @@ export default function(data) {
       <hr>
       <div><i class="fa fa-chevron-right"></i>Station Name: ${data.station}</div>
       <hr>
-    </div>`;
+    </div>
+  `;
 }
 
 
