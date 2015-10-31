@@ -1,8 +1,10 @@
-function cartoonTemplate(data) {
+export default function(data) {
 
   return `
     <div class="full-profile">
-      <button class="back"><i class="fa fa-arrow-left"></i></button>
+      <button class="back">
+        <i class="fa fa-arrow-left"></i>
+      </button>
       <h2>Character Profile</h2>
       <div><img class="profile" src="${data.photo}"></div>
       <div><i class="fa fa-user"></i>${data.characterName}</div>
@@ -14,6 +16,5 @@ function cartoonTemplate(data) {
     </div>`;
 }
 
-export default cartoonTemplate;
 
 // This gives the template of how the data will be shown when a character is clicked

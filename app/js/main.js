@@ -145,6 +145,8 @@ var _viewsIndividual_view = require('./views/individual_view');
 
 var _viewsIndividual_view2 = _interopRequireDefault(_viewsIndividual_view);
 
+// import addCartoon from '.views/add_cartoon';
+
 var Router = _backbone2['default'].Router.extend({
 
   routes: {
@@ -229,15 +231,14 @@ function processData(data) {
   }).join('');
 }
 
-function listTemplate(data) {
-  return '\n    <h2>Cartoon List</h2>\n    <div>' + processData(data) + '</div>\n  ';
-}
-
-exports['default'] = listTemplate;
+exports['default'] = function (data) {
+  return '\n    <h2>Cartoon List</h2>\n    <div>' + processData(data) + '</div>\n    <button class="create-character"><i class="fa fa-plus"></i> Add New</button>\n  ';
+};
 
 // this passes the processData function that sets up the list of items so that
 // they can be passed through the listTemplate function so that all the cartoons can be
 // shown correctly
+// Also added the new Cartoon Button
 module.exports = exports['default'];
 
 },{}],7:[function(require,module,exports){
@@ -246,12 +247,11 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-function cartoonTemplate(data) {
 
-  return "\n    <div class=\"full-profile\">\n      <button class=\"back\"><i class=\"fa fa-arrow-left\"></i></button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
-}
+exports["default"] = function (data) {
 
-exports["default"] = cartoonTemplate;
+  return "\n    <div class=\"full-profile\">\n      <button class=\"back\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
+};
 
 // This gives the template of how the data will be shown when a character is clicked
 module.exports = exports["default"];

@@ -11,15 +11,16 @@ function processData(data) {
   }).join('');
 }
 
-function listTemplate(data) {
+export default function(data) {
   return `
     <h2>Cartoon List</h2>
     <div>${processData(data)}</div>
+    <button class="create-character"><i class="fa fa-plus"></i> Add New</button>
   `;
 }
 
-export default listTemplate;
 
 // this passes the processData function that sets up the list of items so that 
 // they can be passed through the listTemplate function so that all the cartoons can be 
 // shown correctly 
+// Also added the new Cartoon Button 

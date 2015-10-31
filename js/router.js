@@ -3,6 +3,7 @@ import $ from 'jquery';
 import CartoonCollection from './cartoon_collection';
 import listTemplate from './views/cartoon_list';
 import cartoonTemplate from './views/individual_view';
+// import addCartoon from '.views/add_cartoon';
 
 var Router = Backbone.Router.extend({
 
