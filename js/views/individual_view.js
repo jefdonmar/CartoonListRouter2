@@ -9,7 +9,7 @@ function cartoonTemplate(data) {
       <hr>
       <div><i class="fa fa-chevron-right"></i>Cartoon Title: ${data.cartoonName}</div>
       <hr>
-      <div><i class="fa fa-chevron-right"></i>Station Name: ${data.Station}</div>
+      <div><i class="fa fa-chevron-right"></i>Station Name: ${data.station}</div>
       <hr>
     </div>`;
 }

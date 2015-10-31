@@ -18,14 +18,14 @@ var Router = Backbone.Router.extend({
 
     let router = this;
 
-    this.$el.on('click', '.cartoon-list-item', (event) => {
+    this.$el.on('click', '.cartoon-list-item', function(event) {
       let $p = $(event.currentTarget);
       let cartoonId = $p.data('cartoon-id');
       router.navigate('cartoons/${cartoonId}');
       router.showIndividualCartoon(cartoonId);
       // back to home button
-      let backButton = $('back');
-      backButton.on('click', (event) => {
+      let backButton = $('.back');
+      backButton.on('click', function(event) {
         let $button = $(event.currentTarget);
         router.navigate('', {trigger: true});
       });
@@ -49,7 +49,7 @@ var Router = Backbone.Router.extend({
     });
   },
 
-  showIndividualCartoon: (cartoonId) => {
+  showIndividualCartoon: function(cartoonId) {
     console.log('show individual cartoons');
     let cartoon = this.cartoons.get(cartoonId);
 
@@ -59,13 +59,13 @@ var Router = Backbone.Router.extend({
       let cartoon = this.cartoons.add({objectId: cartoonId});
       let router = this;
       this.showSpinner();
-      cartoon.fetch().then(() => {
+      cartoon.fetch().then(function () {
         cartoon.$div.html(cartoonTemplate(cartoon.toJSON()));
       });
     }
   },
 
-  start: () => {
+  start: function() {
     Backbone.history.start();
   }
 

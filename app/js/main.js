@@ -165,7 +165,7 @@ var Router = _backbone2['default'].Router.extend({
       router.navigate('cartoons/${cartoonId}');
       router.showIndividualCartoon(cartoonId);
       // back to home button
-      var backButton = (0, _jquery2['default'])('back');
+      var backButton = (0, _jquery2['default'])('.back');
       backButton.on('click', function (event) {
         var $button = (0, _jquery2['default'])(event.currentTarget);
         router.navigate('', { trigger: true });
@@ -189,16 +189,18 @@ var Router = _backbone2['default'].Router.extend({
   },
 
   showIndividualCartoon: function showIndividualCartoon(cartoonId) {
+    var _this2 = this;
+
     console.log('show individual cartoons');
-    var cartoon = undefined.cartoons.get(cartoonId);
+    var cartoon = this.cartoons.get(cartoonId);
 
     if (cartoon) {
-      undefined.$el.html((0, _viewsIndividual_view2['default'])(cartoon.toJSON()));
+      this.$el.html((0, _viewsIndividual_view2['default'])(cartoon.toJSON()));
     } else {
       (function () {
-        var cartoon = undefined.cartoons.add({ objectId: cartoonId });
-        var router = undefined;
-        undefined.showSpinner();
+        var cartoon = _this2.cartoons.add({ objectId: cartoonId });
+        var router = _this2;
+        _this2.showSpinner();
         cartoon.fetch().then(function () {
           cartoon.$div.html((0, _viewsIndividual_view2['default'])(cartoon.toJSON()));
         });
@@ -246,7 +248,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 function cartoonTemplate(data) {
 
-  return "\n    <div class=\"full-profile\">\n      <button class=\"back\"><i class=\"fa fa-arrow-left\"></i></button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.Station + "</div>\n      <hr>\n    </div>";
+  return "\n    <div class=\"full-profile\">\n      <button class=\"back\"><i class=\"fa fa-arrow-left\"></i></button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
 }
 
 exports["default"] = cartoonTemplate;
