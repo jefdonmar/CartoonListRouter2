@@ -1,75 +1,107 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
-import CartoonCollection from './cartoon_collection';
-import listTemplate from './views/cartoon_list';
-import cartoonTemplate from './views/individual_view';
-// import addCartoon from '.views/add_cartoon';
 
-var Router = Backbone.Router.extend({
+import {Cartoons as CartoonCollection} from './resources';
+import {Cartoon as CartoonModel} from './resources';
+import {Cartoon as CartoonView} from './views';
+import {Cartoons as CartoonsView} from './views';
+import {Spinner} from './views';
+import {NewCartoon} from '.views';
+
+export default Backbone.Router.extend({
 
   routes: {
-    '' : 'cartoonlist',
-    'individualView/:id' : 'showIndividualCartoon'
+    "" : "redirectToCartoons",
+    "cartoons": "showCartoons",
+    "cartoon/:id" : "showCartoon",
+    "addCartoon" : "newCartoon"
   },
 
-  initialize: function(appElement) {
+  initialize(appElement) {
     this.$el = appElement;
+    this.collection = new CartoonCollection();
 
-    this.cartoons = new CartoonCollection();
+    this.$el.on('click', '.cartoon-list-item', (event) => {
+      let $div = $(event.currentTarget);
+      let cartoonId = $div.data('cartoon-id');
+      
+      this.navigate('cartoon/${cartoonId}', {trigger: true});  
+    });
 
-    let router = this;
+    this.$el.on('click', '.back-button', (event) => {
+      console.log("y'all go back not ya hear");
+      let $button = $(event.currentTarget);
+      let route = $button.data('to');
+      this.navigate(route, {trigger: true});
+    });
 
-    this.$el.on('click', '.cartoon-list-item', function(event) {
-      let $p = $(event.currentTarget);
-      let cartoonId = $p.data('cartoon-id');
-      router.navigate('cartoons/${cartoonId}');
-      router.showIndividualCartoon(cartoonId);
-      // back to home button
-      let backButton = $('.back');
-      backButton.on('click', function(event) {
-        let $button = $(event.currentTarget);
-        router.navigate('', {trigger: true});
+    this.$el.on('click', ',create-character', (event) => {
+      console.log('should have me at the update form');
+      let $div = $(event.currentTarget);
+      this.navigate('addCartoon', {trigger: true});
+    });
+
+    this.$el.on('click', '.add-new-cartoon', (event) => {
+      console.log('I wanna be a cartoon');
+
+      let photo = $(this.$el).find('.photo').val();
+      let characterName = $(this.$el).find('.characterName').val();
+      let cartoonTitle = $(this.$el).find('.cartoonTitle').val();
+      let station = $(this.$el).find('.station').val();
+
+      let model = new CartoonModel({
+        Photo: photo,
+        Character: characterName,
+        Cartoon: cartoonTitle,
+        Station: station
       });
+
+      this.collection.add(model);
+      model.save().then( () => {
+        alert('And We have a new CARTOON!!!');
+        this.navigate('cartoons', {trigger: true});
+      });
+
     });
-
   },
 
-  showSpinner: function() {
-    this.$el.html(
-      '<i class="fa fa-spinner fa-spin"></i>'
-    );
+  start() {
+    Backbone.history.start();
+    return this;
   },
 
-  cartoonlist: function() {
+  showSpinner() {
+    this.$el.html(Spinner());
+  },
+
+  redirectToCartoons() {
+    this.navigate('cartoons', {replace: true, trigger: true});
+  },
+
+  showCartoons() {
     this.showSpinner();
-    console.log('grabbing cartoons');
-    this.cartoons.fetch().then(() => {
-
-      this.$el.html(listTemplate(this.cartoons.toJSON()));
-
+    this.collection.fetch().then( () => {
+      this.$el.html(CartoonsView(this.collection.toJSON()));
     });
   },
 
-  showIndividualCartoon: function(cartoonId) {
-    console.log('show individual cartoons');
-    let cartoon = this.cartoons.get(cartoonId);
+  showCartoon(id) {
+    let cartoon = this.collection.get(id);
 
     if (cartoon) {
-      this.$el.html(cartoonTemplate(cartoon.toJSON()));
+      this.$el.html(CartoonView(cartoon.toJSON()));
     } else {
-      let cartoon = this.cartoons.add({objectId: cartoonId});
-      let router = this;
       this.showSpinner();
-      cartoon.fetch().then(function () {
-        cartoon.$div.html(cartoonTemplate(cartoon.toJSON()));
+      cartoon = this.collection.add({objectId: id});
+      cartoon.fetch().then( () => {
+        this.$el.html(CartoonView(cartoon.toJSON()));
       });
     }
   },
 
-  start: function() {
-    Backbone.history.start();
+  newCartoon() {
+    this.showSpinner();
+    this.$el.html.(NewCartoon());
   }
 
 });
-
-export default Router;

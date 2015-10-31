@@ -1,18 +1,17 @@
 import Backbone from 'backbone';
-import CartoonModel from './cartoon_model';
+import Cartoon from './cartoon';
 
-let CartoonCollection = Backbone.Collection.extend({
+export default Backbone.Collection.extend({
 
   url: 'https://api.parse.com/1/classes/cartoonList2',
 
-  model: CartoonModel,
+  model: Cartoon,
 
-  parse: function(data) {
+  parse(data) {
     return data.results;
   }
 
 });
 
-export default CartoonCollection;
 
 // This sets up our list view of all of the cartoons that I have on my list 

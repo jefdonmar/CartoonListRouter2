@@ -2,7 +2,7 @@ export default function(data) {
 
   return `
     <div class="full-profile">
-      <button class="back">
+      <button class="back-button">
         <i class="fa fa-arrow-left"></i>
       </button>
       <h2>Character Profile</h2>
