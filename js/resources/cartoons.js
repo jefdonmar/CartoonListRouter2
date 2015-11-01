@@ -7,7 +7,7 @@ export default Backbone.Collection.extend({
 
   model: Cartoon,
 
-  parse(data) {
+  parse: function(data) {
     return data.results;
   }
 

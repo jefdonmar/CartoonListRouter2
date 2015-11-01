@@ -4,10 +4,12 @@ export default function() {
       <h2>Add Cartoon Character</h2>
       <form>
         <label>Charcter: <input type="text" class ="characterName"></label>
+        <br>
         <label>Cartoon Title: <input type="text" class ="cartoonName"></label>
         <label>Station Name: <input type="text" class ="station"></label>
         <label>GIF URL: <input type="text" class ="photo"></label>
       </form>
+      <br>
       <button class="add-new-cartoon">Add New Character</button>
     </div>
   `;

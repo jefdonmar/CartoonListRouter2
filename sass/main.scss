@@ -67,4 +67,26 @@ body {
     color: black;
   }
 
+  .add-cartoon {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-left: 11%;
+    margin-bottom: 15px;
+    margin-top: 5%;
+  }
+
+  .add-cartoon h2 {
+    font-size: 20px;
+  }
+
+  .add-cartoon button {
+    margin-left: 70px;
+  }
+
+  .add-cartoon form {
+    margin-left: 5px;
+  }
+
 }

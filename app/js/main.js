@@ -170,7 +170,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     });
 
     this.$el.on('click', '.back-button', function (event) {
-      console.log("y'all go back not ya hear");
+      console.log("y'all go back now ya hear");
       var $button = (0, _jquery2['default'])(event.currentTarget);
       var route = $button.data('to');
       _this.navigate(route, { trigger: true });
@@ -259,7 +259,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (data) {
-  return "\n    <div class=\"cartoon\">\n      <button class=\"back-button\" data-to=\"cartoons\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <h2>Character Profile</h2>\n      <div><img class=\"profile\" src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>\n  ";
+  return "\n    <div class=\"cartoon\">\n      <button class=\"back-button\" data-to=\"cartoons\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <div class=\"image\"><img src=\"" + data.photo + "\"></div>\n       <h2>Character Profile</h2>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
 };
 
 // This gives the template of how the data will be shown when a character is clicked
@@ -325,7 +325,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function () {
-  return "\n    <div class=\"add-cartoon\">\n      <h2>Add Cartoon Character</h2>\n      <form>\n        <label>Charcter: <input type=\"text\" class =\"characterName\"></label>\n        <label>Cartoon Title: <input type=\"text\" class =\"cartoonName\"></label>\n        <label>Station Name: <input type=\"text\" class =\"station\"></label>\n        <label>GIF URL: <input type=\"text\" class =\"photo\"></label>\n      </form>\n      <button class=\"add-new-cartoon\">Add New Character</button>\n    </div>\n  ";
+  return "\n    <div class=\"add-cartoon\">\n      <h2>Add Cartoon Character</h2>\n      <form>\n        <label>Charcter: <input type=\"text\" class =\"characterName\"></label>\n        <br>\n        <label>Cartoon Title: <input type=\"text\" class =\"cartoonName\"></label>\n        <label>Station Name: <input type=\"text\" class =\"station\"></label>\n        <label>GIF URL: <input type=\"text\" class =\"photo\"></label>\n      </form>\n      <br>\n      <button class=\"add-new-cartoon\">Add New Character</button>\n    </div>\n  ";
 };
 
 // Gives how the add new cartoon form will look

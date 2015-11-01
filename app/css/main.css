@@ -2063,5 +2063,19 @@ body {
   body .fa {
     padding: 5px;
     color: black; }
+  body .add-cartoon {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-left: 11%;
+    margin-bottom: 15px;
+    margin-top: 5%; }
+  body .add-cartoon h2 {
+    font-size: 20px; }
+  body .add-cartoon button {
+    margin-left: 70px; }
+  body .add-cartoon form {
+    margin-left: 5px; }
 
 /*# sourceMappingURL=main.css.map */

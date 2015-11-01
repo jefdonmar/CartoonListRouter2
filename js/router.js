@@ -29,7 +29,7 @@ export default Backbone.Router.extend({
     });
 
     this.$el.on('click', '.back-button', (event) => {
-      console.log("y'all go back not ya hear");
+      console.log("y'all go back now ya hear");
       let $button = $(event.currentTarget);
       let route = $button.data('to');
       this.navigate(route, {trigger: true});
