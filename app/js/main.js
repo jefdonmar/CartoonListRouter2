@@ -166,7 +166,7 @@ exports['default'] = _backbone2['default'].Router.extend({
       var $div = (0, _jquery2['default'])(event.currentTarget);
       var cartoonId = $div.data('cartoon-id');
 
-      _this.navigate('cartoon/${cartoonId}', { trigger: true });
+      _this.navigate('cartoon/' + cartoonId, { trigger: true });
     });
 
     this.$el.on('click', '.back-button', function (event) {
@@ -259,7 +259,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (data) {
-  return "\n    <div class=\"cartoon\">\n      <button class=\"back-button\" data-to=\"cartoons\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <div class=\"image\"><img src=\"" + data.photo + "\"></div>\n       <h2>Character Profile</h2>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
+  return "\n    <div class=\"cartoon\">\n      <button class=\"back-button\" data-to=\"cartoons\">\n        <i class=\"fa fa-arrow-left\"></i>\n      </button>\n      <h2>Character Profile</h2>\n      <div class=\"image\"><img src=\"" + data.photo + "\"></div>\n      <div><i class=\"fa fa-user\"></i>" + data.characterName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Cartoon Title: " + data.cartoonName + "</div>\n      <hr>\n      <div><i class=\"fa fa-chevron-right\"></i>Station Name: " + data.station + "</div>\n      <hr>\n    </div>";
 };
 
 // This gives the template of how the data will be shown when a character is clicked

@@ -4,8 +4,8 @@ export default function(data) {
       <button class="back-button" data-to="cartoons">
         <i class="fa fa-arrow-left"></i>
       </button>
+      <h2>Character Profile</h2>
       <div class="image"><img src="${data.photo}"></div>
-       <h2>Character Profile</h2>
       <div><i class="fa fa-user"></i>${data.characterName}</div>
       <hr>
       <div><i class="fa fa-chevron-right"></i>Cartoon Title: ${data.cartoonName}</div>

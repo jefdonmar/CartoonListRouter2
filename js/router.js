@@ -25,7 +25,7 @@ export default Backbone.Router.extend({
       let $div = $(event.currentTarget);
       let cartoonId = $div.data('cartoon-id');
       
-      this.navigate('cartoon/${cartoonId}', {trigger: true});  
+      this.navigate(`cartoon/${cartoonId}`, {trigger: true});  
     });
 
     this.$el.on('click', '.back-button', (event) => {
