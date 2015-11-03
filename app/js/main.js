@@ -185,16 +185,16 @@ exports['default'] = _backbone2['default'].Router.extend({
     this.$el.on('click', '.add-new-cartoon', function (event) {
       console.log('I wanna be a cartoon');
 
-      var photo = (0, _jquery2['default'])(_this.$el).find('.photo').val();
-      var characterName = (0, _jquery2['default'])(_this.$el).find('.characterName').val();
-      var cartoonTitle = (0, _jquery2['default'])(_this.$el).find('.cartoonTitle').val();
-      var station = (0, _jquery2['default'])(_this.$el).find('.station').val();
+      var Photo = (0, _jquery2['default'])(_this.$el).find('.photo').val();
+      var CharacterName = (0, _jquery2['default'])(_this.$el).find('.characterName').val();
+      var CartoonTitle = (0, _jquery2['default'])(_this.$el).find('.cartoonName').val();
+      var Station = (0, _jquery2['default'])(_this.$el).find('.station').val();
 
       var model = new _resources.Cartoon({
-        Photo: photo,
-        Character: characterName,
-        Cartoon: cartoonTitle,
-        Station: station
+        photo: Photo,
+        characterName: CharacterName,
+        cartoonName: CartoonTitle,
+        station: Station
       });
 
       _this.collection.add(model);

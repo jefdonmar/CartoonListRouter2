@@ -38,54 +38,54 @@ export default Backbone.Router.extend({
     this.$el.on('click', '.create-character', (event) => {
       console.log('should have me at the update form');
       let $div = $(event.currentTarget);
-      this.navigate('addCartoon', {trigger: true});
+      this.navigate(`addCartoon`, {trigger: true});
     });
 
     this.$el.on('click', '.add-new-cartoon', (event) => {
       console.log('I wanna be a cartoon');
 
-      let photo = $(this.$el).find('.photo').val();
-      let characterName = $(this.$el).find('.characterName').val();
-      let cartoonTitle = $(this.$el).find('.cartoonTitle').val();
-      let station = $(this.$el).find('.station').val();
+      let Photo = $(this.$el).find('.photo').val();
+      let CharacterName = $(this.$el).find('.characterName').val();
+      let CartoonTitle = $(this.$el).find('.cartoonName').val();
+      let Station = $(this.$el).find('.station').val();
 
       let model = new CartoonModel({
-        Photo: photo,
-        Character: characterName,
-        Cartoon: cartoonTitle,
-        Station: station
+        photo: Photo,
+        characterName: CharacterName,
+        cartoonName: CartoonTitle,
+        station: Station
       });
 
       this.collection.add(model);
       model.save().then( () => {
         alert('And We have a new CARTOON!!!');
-        this.navigate('cartoons', {trigger: true});
+        this.navigate(`cartoons`, {trigger: true});
       });
 
     });
   },
 
-  start: function() {
+  start() {
     Backbone.history.start();
     return this;
   },
 
-  showSpinner: function() {
+  showSpinner() {
     this.$el.html(Spinner());
   },
 
-  redirectToCartoons: function() {
+  redirectToCartoons() {
     this.navigate('cartoons', {replace: true, trigger: true});
   },
 
-  showCartoons: function() {
+  showCartoons() {
     this.showSpinner();
     this.collection.fetch().then( () => {
       this.$el.html(CartoonsView(this.collection.toJSON()));
     });
   },
 
-  showCartoon: function(id) {
+  showCartoon(id) {
     let cartoon = this.collection.get(id);
 
     if (cartoon) {
@@ -99,7 +99,7 @@ export default Backbone.Router.extend({
     }
   },
 
-  newCartoon: function() {
+  newCartoon() {
     this.showSpinner();
     this.$el.html(NewCartoon());
   }
