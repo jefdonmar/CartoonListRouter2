@@ -156,19 +156,24 @@ exports['default'] = _backbone2['default'].Router.extend({
     'addCartoon': 'newCartoon'
   },
 
+  // This occurs when the app runs
   initialize: function initialize(appElement) {
     var _this = this;
 
+    // This defines your DOM element
     this.$el = appElement;
+
+    // This creates the instance of the collection
     this.collection = new _resources.Cartoons();
 
+    // click event for selecting a cartoon
     this.$el.on('click', '.cartoon-list-item', function (event) {
       var $div = (0, _jquery2['default'])(event.currentTarget);
       var cartoonId = $div.data('cartoon-id');
-
       _this.navigate('cartoon/' + cartoonId, { trigger: true });
     });
 
+    // click event for the back button
     this.$el.on('click', '.back-button', function (event) {
       console.log("y'all go back now ya hear");
       var $button = (0, _jquery2['default'])(event.currentTarget);
@@ -176,20 +181,19 @@ exports['default'] = _backbone2['default'].Router.extend({
       _this.navigate(route, { trigger: true });
     });
 
+    // click event for adding a new character
     this.$el.on('click', '.create-character', function (event) {
       console.log('should have me at the update form');
       var $div = (0, _jquery2['default'])(event.currentTarget);
       _this.navigate('addCartoon', { trigger: true });
     });
 
+    // Click event to submit new cartoon character
     this.$el.on('click', '.add-new-cartoon', function (event) {
-      console.log('I wanna be a cartoon');
-
-      var Photo = (0, _jquery2['default'])(_this.$el).find('.photo').val();
-      var CharacterName = (0, _jquery2['default'])(_this.$el).find('.characterName').val();
-      var CartoonTitle = (0, _jquery2['default'])(_this.$el).find('.cartoonName').val();
-      var Station = (0, _jquery2['default'])(_this.$el).find('.station').val();
-
+      var Photo = (0, _jquery2['default'])('.photo').val();
+      var CharacterName = (0, _jquery2['default'])('.characterName').val();
+      var CartoonTitle = (0, _jquery2['default'])('.cartoonName').val();
+      var Station = (0, _jquery2['default'])('.station').val();
       var model = new _resources.Cartoon({
         photo: Photo,
         characterName: CharacterName,
@@ -210,14 +214,17 @@ exports['default'] = _backbone2['default'].Router.extend({
     return this;
   },
 
+  // Spinner shown when fetching the data
   showSpinner: function showSpinner() {
     this.$el.html((0, _views.Spinner)());
   },
 
+  // start the app on the address book and lets user return to previous page
   redirectToCartoons: function redirectToCartoons() {
     this.navigate('cartoons', { replace: true, trigger: true });
   },
 
+  // the full cartoon character page
   showCartoons: function showCartoons() {
     var _this2 = this;
 
@@ -227,6 +234,7 @@ exports['default'] = _backbone2['default'].Router.extend({
     });
   },
 
+  // Show a specific contact from the address book
   showCartoon: function showCartoon(id) {
     var _this3 = this;
 

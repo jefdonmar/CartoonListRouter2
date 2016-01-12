@@ -17,17 +17,23 @@ export default Backbone.Router.extend({
     'addCartoon' : 'newCartoon'
   },
 
+  // This occurs when the app runs 
   initialize: function(appElement) {
+
+    // This defines your DOM element
     this.$el = appElement;
+
+    // This creates the instance of the collection
     this.collection = new CartoonCollection();
 
+    // click event for selecting a cartoon
     this.$el.on('click', '.cartoon-list-item', (event) => {
       let $div = $(event.currentTarget);
       let cartoonId = $div.data('cartoon-id');
-      
       this.navigate(`cartoon/${cartoonId}`, {trigger: true});  
     });
 
+    // click event for the back button 
     this.$el.on('click', '.back-button', (event) => {
       console.log("y'all go back now ya hear");
       let $button = $(event.currentTarget);
@@ -35,20 +41,19 @@ export default Backbone.Router.extend({
       this.navigate(route, {trigger: true});
     });
 
+    // click event for adding a new character
     this.$el.on('click', '.create-character', (event) => {
       console.log('should have me at the update form');
       let $div = $(event.currentTarget);
       this.navigate(`addCartoon`, {trigger: true});
     });
 
+    // Click event to submit new cartoon character
     this.$el.on('click', '.add-new-cartoon', (event) => {
-      console.log('I wanna be a cartoon');
-
-      let Photo = $(this.$el).find('.photo').val();
-      let CharacterName = $(this.$el).find('.characterName').val();
-      let CartoonTitle = $(this.$el).find('.cartoonName').val();
-      let Station = $(this.$el).find('.station').val();
-
+      let Photo = $('.photo').val();
+      let CharacterName = $('.characterName').val();
+      let CartoonTitle = $('.cartoonName').val();
+      let Station = $('.station').val();
       let model = new CartoonModel({
         photo: Photo,
         characterName: CharacterName,
@@ -70,14 +75,17 @@ export default Backbone.Router.extend({
     return this;
   },
 
+  // Spinner shown when fetching the data 
   showSpinner() {
     this.$el.html(Spinner());
   },
 
+  // start the app on the address book and lets user return to previous page
   redirectToCartoons() {
     this.navigate('cartoons', {replace: true, trigger: true});
   },
 
+  // the full cartoon character page
   showCartoons() {
     this.showSpinner();
     this.collection.fetch().then( () => {
@@ -85,6 +93,7 @@ export default Backbone.Router.extend({
     });
   },
 
+  // Show a specific contact from the address book
   showCartoon(id) {
     let cartoon = this.collection.get(id);
 
