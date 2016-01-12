@@ -2020,36 +2020,43 @@
 
 body {
   background: #e2ebf3;
-  font-family: "Inconsolata"; }
-  body h2 {
-    margin-left: 5%;
+  max-width: 800px; }
+  body .app {
+    margin-right: 30%; }
+  body h3 {
+    margin-left: 3%;
     border: 1px solid grey;
     max-width: 30%;
-    padding: 5px; }
+    padding: 5px;
+    text-align: center; }
   body img {
     width: 75px;
     height: 75px;
     border-radius: 5px;
     padding: 3px; }
+  body .cartoon-list h3 {
+    margin-left: 5%; }
   body .cartoon-list-item {
     max-width: 30%;
     margin-left: 5%;
-    font-size: 18px; }
+    font-size: 18px;
+    font-size: 10px; }
   body p {
     padding: 5px;
     display: inline-block;
     margin: 0; }
   body .full-profile {
-    max-width: 30%;
+    max-width: 50%;
     margin-left: 3%;
     margin-top: 1%;
-    padding: 10px; }
+    padding: 10px;
+    font-weight: bold; }
   body .full-profile h2 {
     text-align: center;
-    display: inline-block;
-    max-width: 50%; }
+    display: inline;
+    max-width: 30%; }
   body button {
-    background-color: white;
+    background-color: yellow;
     border: none;
     padding: 5px; }
   body .profile {

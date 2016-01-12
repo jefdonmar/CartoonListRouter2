@@ -13,7 +13,7 @@ function processData(data) {
 export default function(data) {
   return `
     <div class='cartoon-list'>
-      <h1>Cartoons</h1>
+      <h3>Cartoons</h3>
       <div>${processData(data)}</div>
       <button class="create-character"><i class="fa fa-plus"></i> Add New</button>
     </div>

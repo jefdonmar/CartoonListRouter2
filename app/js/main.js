@@ -286,7 +286,7 @@ function processData(data) {
 }
 
 exports['default'] = function (data) {
-  return '\n    <div class=\'cartoon-list\'>\n      <h1>Cartoons</h1>\n      <div>' + processData(data) + '</div>\n      <button class="create-character"><i class="fa fa-plus"></i> Add New</button>\n    </div>\n  ';
+  return '\n    <div class=\'cartoon-list\'>\n      <h3>Cartoons</h3>\n      <div>' + processData(data) + '</div>\n      <button class="create-character"><i class="fa fa-plus"></i> Add New</button>\n    </div>\n  ';
 };
 
 // this passes the processData function that sets up the list of items so that

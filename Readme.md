@@ -1,7 +1,12 @@
-## Welcome to My Project
+## Welcome to My Cartoon List Project 2
 
-> I am your Readme.md file, you should probably update me.
+In this repository, I build a basic cartoon list using BackboneJS and Backbone Router.
+In this project, I use a PARSE data base and also added the feature for one to add a cartoon character to this list.
 
+
+Here is a link to my deployment: crazy-jail.surge.sh
+
+I hope you enjoy!
 
 ## Usage
 
